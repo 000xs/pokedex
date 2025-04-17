@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pokémon Vault Selector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="vault">
+        <h1>Select Your Pokémon</h1>
+        <form method="post">
+            <select name="pokemon" required>
+                <option value="" disabled selected>Select a Pokémon</option>
+                {% for name in pokemon_list %}
+                    <option value="{{ name }}">{{ name.title() }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Unlock Vault</button>
+        </form>
+
+        {% if pokemon %}
+        <div class="pokemon-card">
+            <h2>{{ pokemon.name }}</h2>
+            <img src="{{ pokemon.image }}" alt="{{ pokemon.name }}">
+            <p><strong>Height:</strong> {{ pokemon.height }}</p>
+            <p><strong>Weight:</strong> {{ pokemon.weight }}</p>
+            <p><strong>Abilities:</strong> {{ pokemon.abilities | join(', ') }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
